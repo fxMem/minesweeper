@@ -1,0 +1,27 @@
+{
+  "name": "miner",
+  "version": "1.0.0",
+  "description": "Miner multiplayer game",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack",
+    "launch": "node ./distr/miner-server.js",
+    "watch": "webpack --watch",
+    "watchBuild": "nodemon \"./distr/miner-server.js\" --watch\"./distr/miner-server.js\"",
+    "run": "npm-run-all --parallel watchBuild watch"
+  },
+  "author": "fxMem",
+  "license": "ISC",
+  "dependencies": {
+    "seedengine.server": "^1.0.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1",
+    "npm-run-all": "^4.1.5",
+    "ts-loader": "^6.0.4",
+    "typescript": "^3.6.2",
+    "webpack": "^4.39.3",
+    "webpack-cli": "^3.3.7",
+    "webpack-node-externals": "^1.7.2"
+  }
+}
