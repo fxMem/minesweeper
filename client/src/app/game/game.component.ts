@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef, Input, OnDestroy } from '@ang
 import * as PIXI from 'pixi.js';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ClientServiceService } from '../common/client-service.service';
-import { PendingService } from '../common/loading-service.service';
+import { ProgressService } from '../common/progress.service';
 //import { TileInfo, TileState } from 'seedengine.client/miner/Field';
 import { Texture } from 'pixi.js';
 import { MinerPlayerState, MinerGameState } from '../../../../core/MinerGameState';
@@ -64,7 +64,7 @@ export class GameComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private client: ClientServiceService,
-    private pending: PendingService) {
+    private pending: ProgressService) {
   }
 
   ngOnDestroy(): void {

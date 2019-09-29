@@ -1,8 +1,8 @@
 <div class="wrapper">
 
-  <div class="error" *ngIf="errorMessage">{{errorMessage}}</div>
+  <div class="error" *ngIf="errorMessage | async">{{errorMessage | async}}</div>
 
-  <div class="floating red" *ngIf="loading">
+  <div class="floating red" *ngIf="loading | async">
     <div class="wait"></div>
   </div>
 

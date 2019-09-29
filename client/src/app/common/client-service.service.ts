@@ -4,7 +4,7 @@ import { SimpleIdentityClient, DefaultSessionClient, VoteLobbyClient, KeyInvitat
 import { SessionInfo } from 'seedengine.client/session/SessionInfo';
 import { VotesNotification } from 'seedengine.client/lobby/VoteMessage';
 import { SessionStateChangedNotification } from 'seedengine.client/session/SessionMessage';
-import { PendingService } from './loading-service.service';
+import { ProgressService } from './progress.service';
 import { OperationResult } from 'seedengine.client/core/OperationResult';
 import { ErrorCode } from 'seedengine.client/transport/ErrorCodes';
 import { InviteInfo } from 'seedengine.client/invite/InviteInfo';
@@ -42,7 +42,7 @@ export class ClientServiceService {
     return this.connected;
   }
 
-  constructor(private pending: PendingService) { }
+  constructor(private pending: ProgressService) { }
 
   
 
