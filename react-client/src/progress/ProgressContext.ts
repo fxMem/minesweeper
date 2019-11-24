@@ -20,7 +20,7 @@ export type ProgressState = {
 
 export type ProgressContextData = {
     progressState: ProgressState,
-    updateProgress: (info: ProgressInfo) => void
+    reportProgress: (info: ProgressInfo) => void
 }
 
 export function createEmptyProgressState(): ProgressState {
@@ -31,7 +31,7 @@ export function createEmptyProgressState(): ProgressState {
 
 export const ProgressContext = React.createContext<ProgressContextData>({
     progressState: createEmptyProgressState(),
-    updateProgress: () => { }
+    reportProgress: () => { }
 });
 
 export function updateProgressState(state: ProgressState, progressInfo: ProgressInfo): ProgressState {

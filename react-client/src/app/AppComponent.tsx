@@ -3,7 +3,7 @@ import { Progress } from "../progress/ProgressProvider";
 import { Router } from "./Router";
 import { Client } from "../client/Client";
 import { useMemo, useState, useCallback } from "react";
-import { reportProgress } from "../progress/reportProgress";
+import { reportProgressForPromise } from "../progress/reportProgressForPromise";
 import { LoginComponent } from "../login/LoginComponent";
 import { EventEmitter } from "../common/EventEmitter";
 import { ProgressState, ProgressInfo, OperationStatus } from "../progress/ProgressContext";
@@ -13,7 +13,7 @@ export function AppComponent() {
     const [connected, setConnected] = useState(false);
     const progressEvent = useMemo(() => new EventEmitter<ProgressInfo>(), []);
     const reportProgressCallback = function <T>(promise: Promise<T>) {
-        return reportProgress(p => progressEvent.emit(p), promise);
+        return reportProgressForPromise(p => progressEvent.emit(p), promise);
     }
     const client = useMemo(() => new Client(reportProgressCallback), []);
     client.onConnectionStateChanged(({ connected }) => {

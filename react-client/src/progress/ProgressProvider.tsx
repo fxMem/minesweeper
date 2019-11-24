@@ -14,9 +14,10 @@ export function Progress(
     }, []);
 
     const _ = useMemo(() => progressEvent.subscribe(updateProgress), []);
+    const reportProgress = useCallback((info: ProgressInfo) => progressEvent.emit(info), []);
 
     return (
-        <ProgressContext.Provider value={{ progressState, updateProgress }} >
+        <ProgressContext.Provider value={{ progressState, reportProgress }} >
             <ProgressToolbar></ProgressToolbar>
 
             {children}
