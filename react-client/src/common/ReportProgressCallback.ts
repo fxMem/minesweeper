@@ -1,0 +1,1 @@
+export type ReportProgressCallback = <T>(operation: Promise<T>, operationName?: string) => Promise<T>;
