@@ -16,6 +16,7 @@ module.exports = {
     },
     devtool: 'source-map',
     devServer:{
+        historyApiFallback: true,
         contentBase: outputDir
     },
     resolve: {
