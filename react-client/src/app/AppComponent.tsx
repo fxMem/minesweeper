@@ -4,7 +4,7 @@ import { Router } from "./Router";
 import { Client } from "../client/Client";
 import { useMemo, useState, useCallback } from "react";
 import { reportProgress } from "../progress/reportProgress";
-import { LoginComponent } from "../login/Login";
+import { LoginComponent } from "../login/LoginComponent";
 import { EventEmitter } from "../common/EventEmitter";
 import { ProgressState, ProgressInfo, OperationStatus } from "../progress/ProgressContext";
 
