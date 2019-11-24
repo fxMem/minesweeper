@@ -26,7 +26,7 @@ enum TileAction {
     Probe
 }
 
-const possibleActionsMap = {
+const possibleActionsMap: { [key: string]: TileAction[] } = {
     [TileState.Closed]: [TileAction.Open, TileAction.Flag],
     [TileState.Open]: [TileAction.Probe],
     [TileState.Flagged]: [TileAction.Flag],
