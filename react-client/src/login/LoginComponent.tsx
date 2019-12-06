@@ -1,17 +1,25 @@
+/** @jsx jsx */ jsx;
 import * as React from "react";
+import { jsx, css } from '@emotion/core'
 import { useState } from "react";
 import { LoginClient } from "../client/LoginClient";
+import { useHistory } from "react-router-dom";
 
+const ContainerStyle = css({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '100%'
+})
 
 export function LoginComponent({ loginClient }: { loginClient: LoginClient }) {
-
     const [username, setUsername] = useState('root');
     const [password, setPassword] = useState('root');
     async function tryLogIn() {
         await loginClient.connect(username, password);
     }
 
-    return <div style={ContainerStyle}>
+    return <div css={ContainerStyle}>
 
         <div style={FormStyle}>
             <input style={InputStyle} type="text" placeholder="username" value={username} onChange={(e) => setUsername(e.target.value)} />
@@ -21,13 +29,6 @@ export function LoginComponent({ loginClient }: { loginClient: LoginClient }) {
         </div>
 
     </div>
-}
-
-const ContainerStyle: React.CSSProperties = {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: '100%'
 }
 
 const InputStyle: React.CSSProperties = {

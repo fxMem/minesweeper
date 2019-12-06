@@ -19,6 +19,7 @@ import { ClientBuilder, SimpleIdentityClient, DefaultSessionClient, VoteLobbyCli
 
 
 export class Client implements VoteClient, SessionClient, GameClient, InviteClient, LoginClient {
+    
 
     private client: ClientType & ClientBuilder;
     private nickname: string;
@@ -83,6 +84,12 @@ export class Client implements VoteClient, SessionClient, GameClient, InviteClie
     public async vote(sessionId: string, vote: boolean): Promise<OperationResult> {
         return this.reportProgress(
             (await this.connectedClient()).votes.vote(sessionId, vote)
+        );
+    }
+
+    async getVotes(sessionId: string): Promise<{ voted: number; unvoted: number; }> {
+        return this.reportProgress(
+            (await this.connectedClient()).votes.getVotesSummary(sessionId)
         );
     }
 
@@ -152,24 +159,18 @@ export class Client implements VoteClient, SessionClient, GameClient, InviteClie
         return this.connectionStatusChangedEvent.subscribe(callback);
     }
 
-    public async connect(nickname: string, password?: string): Promise<void> {
-        var pp = this.connectedClient();
-        let client = await this.reportProgress(
-            pp
-        );
-
-        let res = await this.reportProgress(client.auth.authenticate(nickname, password));
-
-        
-        // await this.reportProgress(
-        //     this.connectedClient().then(
-        //         client => client.auth.authenticate(nickname, password),
-        //         error => { 
-        //             var temp = 1;
-        //             throw error; 
-        //         }
-        //     )
+    public async connect(nickname: string, password?: string): Promise<boolean> {
+        // var pp = this.connectedClient();
+        // let client = await this.reportProgress(
+        //     pp
         // );
+
+        // let res = await this.reportProgress(client.auth.authenticate(nickname, password));
+
+
+        await this.reportProgress(
+            (await this.connectedClient()).auth.authenticate(nickname, password)
+        );
 
         this.nickname = nickname;
         this.connectionStatusChangedEvent.emit(
@@ -177,5 +178,7 @@ export class Client implements VoteClient, SessionClient, GameClient, InviteClie
                 connected: this.connected
             }
         );
+
+        return this.connected;
     }
 }

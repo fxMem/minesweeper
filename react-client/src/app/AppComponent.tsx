@@ -16,6 +16,8 @@ export function AppComponent() {
         return reportProgressForPromise(p => progressEvent.emit(p), promise);
     }
     const client = useMemo(() => new Client(reportProgressCallback), []);
+
+    React.useEffect(() => {client.connect('root', 'root'); }, []);
     client.onConnectionStateChanged(({ connected }) => {
 
         // Temporary, for the sake of display.
@@ -29,8 +31,11 @@ export function AppComponent() {
         setConnected(connected);
     });
 
+    //client.connect('root', 'root');
+
     return <Progress progressEvent={progressEvent}>
         {
+            //  <Router client={client}></Router>
             !connected
                 ? <LoginComponent loginClient={client}></LoginComponent>
                 : <Router client={client}></Router>

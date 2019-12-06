@@ -4,6 +4,7 @@ import { useState } from "react";
 import { SessionClient } from "../client/SessionClient";
 import { SessionInfo } from "seedengine.client/session/SessionInfo";
 import { useRouteMatch, useHistory, useLocation } from "react-router-dom";
+import { HeaderPanel } from "../common/HeaderPanel";
 
 const lightGreen = '#70d48b';
 
@@ -15,6 +16,7 @@ export function LobbyComponent({ sessionClient }: { sessionClient: SessionClient
     const [activeSesions, setActiveSessions] = useState([] as SessionInfo[]);
     const [creationFormVisible, setCreationFormVisible] = useState(false);
 
+    React.useEffect(() => { updateActiveSessions(); }, [])
 
     function toggleCreatePanelVisibility() {
         setCreationFormVisible((prev) => !prev);
@@ -41,19 +43,28 @@ export function LobbyComponent({ sessionClient }: { sessionClient: SessionClient
     }
 
     return <>
-        <div style={{ display: 'flex', backgroundColor: lightGreen, padding: '1em', alignItems: 'center' }}>
+        <HeaderPanel>
             <span style={{ marginRight: '1em' }}>List of active sessions</span>
             <Button onClick={updateActiveSessions}>Update</Button>
-        </div>
+        </HeaderPanel>
 
         {
-            activeSesions && <div>
+            activeSesions && <div style={{ margin: '1em 1em 0' }}>
                 {
                     activeSesions.map
                         (s =>
                             <div>
-                                {`${s.id || s.description} (Players count: ${s.playersCount})`}
-                                <Button onClick={() => join(s.id)}>Join</Button>
+                                <span style={{ fontWeight: 'bold', marginRight: '0.5em' }}>
+                                    {
+                                        s.id || s.description
+                                    }
+                                </span>
+
+                                <span>
+                                    {`(Players count: ${s.playersCount})`}
+                                </span>
+
+                                <Button style={{ margin: '0 0.5em 0' }} onClick={() => join(s.id)}>Join</Button>
                                 <Button>Create invite</Button>
                                 {joiningError && <span style={{ color: 'red' }}>{joiningError}</span>}
                             </div>
