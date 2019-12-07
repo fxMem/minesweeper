@@ -18,16 +18,20 @@ export function RoomComponent({ vote, session, game }: { vote: VoteClient, game:
     useEffect(() => {
         session.getSession(sessionId).then(s => setCurrentSession(s));
         vote.getVotes(sessionId).then(v => setVotes(v));
-    }, []);
 
-    vote.onVoteNotification(v => {
-        setVotes(v);
-    });
+        vote.onVoteNotification(v => {
+            setVotes(v);
+        });
+    }, []);
 
     const canVote = votes && currrentSession;
     function setReady(value: boolean) {
         setVoted(value);
         vote.vote(sessionId, value);
+    }
+
+    if (votes?.unvoted === 0) {
+        history.push('/game', { sessionId });
     }
 
     return <>
