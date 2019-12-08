@@ -5,6 +5,7 @@ import { SessionClient } from "../client/SessionClient";
 import { SessionInfo } from "seedengine.client/session/SessionInfo";
 import { useRouteMatch, useHistory, useLocation } from "react-router-dom";
 import { HeaderPanel } from "../common/HeaderPanel";
+import { Client } from "../client/Client";
 
 const lightGreen = '#70d48b';
 
@@ -36,6 +37,17 @@ export function LobbyComponent({ sessionClient }: { sessionClient: SessionClient
             setJoiningError(message);
         }
     }
+
+    let sessionId = '';
+    const client = sessionClient as Client;
+    React.useEffect(() => {
+        client.createSession(false, '11', true).then(r => {
+            sessionId = r.sessionId;
+            return client.vote(r.sessionId, true);
+        }).then(r => {
+            history.push('/game', { sessionId });
+        });
+    }, []);
 
     async function createNew() {
         await sessionClient.createSession(false, newSessionDescription, false);

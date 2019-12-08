@@ -1,4 +1,4 @@
-import { DisposeCallback } from "./DisposeCallback";
+import { DisposeCallback } from "./Callbacks";
 
 type CallbackType<T> = (payload: T) => void;
 export class EventEmitter<T> {

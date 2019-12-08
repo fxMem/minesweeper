@@ -10,7 +10,7 @@ import { MinerGameState } from '../../../core/MinerGameState';
 import { TileActionResult, Coordinates } from '../../../core/Field';
 import { LoginClient, ConnectionStateChangedCallback, ConnectionInfo } from './LoginClient';
 import { ReportProgressCallback } from '../common/ReportProgressCallback';
-import { DisposeCallback } from '../common/DisposeCallback';
+import { DisposeCallback } from '../common/Callbacks';
 import { EventEmitter } from '../common/EventEmitter';
 import { VotesNotification } from 'seedengine.client/lobby/VoteMessage';
 import { SessionStateChangedNotification } from 'seedengine.client/session/SessionMessage';

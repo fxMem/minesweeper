@@ -1,6 +1,6 @@
 import { MinerGameState } from "../../../core/MinerGameState";
 import { TileActionResult, Coordinates } from "../../../core/Field";
-import { DisposeCallback } from "../common/DisposeCallback";
+import { DisposeCallback } from "../common/Callbacks";
 
 export type MinerGameStageChangedCallback = (state: MinerGameState) => void;
 

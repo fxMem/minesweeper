@@ -7,6 +7,7 @@ import { reportProgressForPromise } from "../progress/reportProgressForPromise";
 import { LoginComponent } from "../login/LoginComponent";
 import { EventEmitter } from "../common/EventEmitter";
 import { ProgressState, ProgressInfo, OperationStatus } from "../progress/ProgressContext";
+import { useHistory } from "react-router-dom";
 
 
 export function AppComponent() {
@@ -17,7 +18,10 @@ export function AppComponent() {
     }
     const client = useMemo(() => new Client(reportProgressCallback), []);
 
-    React.useEffect(() => {client.connect('root', 'root'); }, []);
+    React.useEffect(() => {
+        client.connect('root', 'root');
+    }, []);
+
     client.onConnectionStateChanged(({ connected }) => {
 
         // Temporary, for the sake of display.

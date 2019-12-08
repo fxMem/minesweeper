@@ -1,6 +1,6 @@
 import { VotesNotification } from "seedengine.client/lobby/VoteMessage";
 import { OperationResult } from "seedengine.client/core/OperationResult";
-import { DisposeCallback } from "../common/DisposeCallback";
+import { DisposeCallback } from "../common/Callbacks";
 
 export type VoteNotificationCallback = (votes: VotesNotification) => void;
 

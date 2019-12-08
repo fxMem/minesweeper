@@ -14,7 +14,7 @@ export function Router({ client }: { client: Client }) {
                 <Redirect exact={true} from='/' to='/lobby' />
 
                 <Route path="/lobby">
-                    <LobbyComponent sessionClient={client} /> 
+                    <LobbyComponent sessionClient={client} />
                 </Route>
 
                 <Route path="/room">
@@ -22,7 +22,11 @@ export function Router({ client }: { client: Client }) {
                 </Route>
 
                 <Route path="/game">
-                    <GameComponent game={client} session={client} />
+                    <GameComponent
+                        game={client}
+                        session={client}
+                        currentPlayer={{ nickname: client.Nickname }}
+                    />
                 </Route>
             </Switch>
         </BrowserRouter>)

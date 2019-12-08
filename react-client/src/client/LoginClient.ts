@@ -1,4 +1,4 @@
-import { DisposeCallback } from "../common/DisposeCallback";
+import { DisposeCallback } from "../common/Callbacks";
 
 export type ConnectionInfo = { connected: boolean };
 export type ConnectionStateChangedCallback = ({ connected }: ConnectionInfo) => void;

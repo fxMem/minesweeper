@@ -1,7 +1,7 @@
 import { OperationResult } from "seedengine.client/core/OperationResult";
 import { SessionInfo } from "seedengine.client/session/SessionInfo";
 import { SessionStateChangedNotification } from "seedengine.client/session/SessionMessage";
-import { DisposeCallback } from "../common/DisposeCallback";
+import { DisposeCallback } from "../common/Callbacks";
 
 export type SessionStateChangedCallback = (notification: SessionStateChangedNotification) => void;
 
