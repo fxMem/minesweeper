@@ -14,32 +14,36 @@ import { SpinnerCube } from '../common/SpinnerCube';
 import { Loader } from '../common/Loader';
 import { PlayerInfo } from './PlayerInfo';
 
-export function GameComponent({ session, game, currentPlayer }: { 
+export function GameComponent({ session, game, currentPlayer }: {
     currentPlayer: PlayerInfo,
-    game: GameClient, 
-    session: SessionClient 
+    game: GameClient,
+    session: SessionClient
 }) {
     const history = useHistory();
     const { sessionId } = history.location.state;
     const [gameState, setGameState] = useState<MinerGameState>(null);
     useEffect(() => {
         game.getState(sessionId).then(state => {
+            const firt = state.data[0];
+            state.data = [firt, firt, firt, firt, firt, firt, firt];
             setGameState(state);
         });
         game.onGameStateChanged(state => {
+            const firt = state.data[0];
+            state.data = [firt, firt, firt, firt, firt, firt, firt];
             setGameState(state);
         })
     }, []);
 
-    function giveUp() {
-
+    function exit() {
+        session.leaveSession(sessionId);
     }
-    
+
     return <Loader data={gameState}>
         {
             (gameState) =>
                 <div>
-                    <GameHeader gameState={gameState} giveUpCallback={giveUp}></GameHeader>
+                    <GameHeader gameState={gameState} exitCallback={exit}></GameHeader>
 
                     <div css={{
                         display: 'grid'
@@ -47,8 +51,8 @@ export function GameComponent({ session, game, currentPlayer }: {
                         {
                             gameState.data.map(playerData => <Field {
                                 ...{
-                                    ...playerData, 
-                                    sessionId, 
+                                    ...playerData,
+                                    sessionId,
                                     game,
                                     canPlay: currentPlayer.nickname === playerData.name
                                 }} />)

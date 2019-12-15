@@ -7,7 +7,10 @@ import { MinerGameState } from '../../../core/MinerGameState';
 import { Action } from '../common/Callbacks';
 import { useState } from 'react';
 
-export function GameHeader({ gameState, giveUpCallback }: { gameState: MinerGameState, giveUpCallback: Action }) {
+export function GameHeader({ gameState, exitCallback }: { 
+    gameState: MinerGameState, 
+    exitCallback: Action 
+}) {
 
     const [timePassed, setTimePassed] = useState(0);
     React.useEffect(() => {
@@ -24,13 +27,13 @@ export function GameHeader({ gameState, giveUpCallback }: { gameState: MinerGame
                 value = `0${value}`;
             }
 
-            return value;
+            return value; 
         }
     }
 
     return <HeaderPanel>
         <span>Game in progress: </span>
         <span css={{ margin: '0 1em 0', fontFamily: 'Lucida Sans Unicode' }}>{formatTime(timePassed)}</span>
-        <Button onClick={giveUpCallback}>Give up!</Button>
+        <Button onClick={exitCallback}>Exit</Button>
     </HeaderPanel>
 }

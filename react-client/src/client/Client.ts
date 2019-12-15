@@ -120,6 +120,12 @@ export class Client implements VoteClient, SessionClient, GameClient, InviteClie
         );
     }
 
+    public async leaveSession(sessionId: string): Promise<void> {
+        return this.reportProgress(
+            (await this.connectedClient()).sessions.leaveSession(sessionId)
+        );
+    }
+
     public async getInviteInfo(key: string): Promise<InviteInfo> {
         return this.reportProgress((await this.connectedClient()).invites.getInviteInfo(key));
     }

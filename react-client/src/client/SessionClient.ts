@@ -8,6 +8,8 @@ export type SessionStateChangedCallback = (notification: SessionStateChangedNoti
 export interface SessionClient {
     joinSession(sessionId: string): Promise<OperationResult>;
 
+    leaveSession(sessionId: string): Promise<void>;
+
     createSession(isPrivate: boolean, sessionDescription?: string, join?: boolean): Promise<{
         sessionId: string
         joined?: OperationResult
